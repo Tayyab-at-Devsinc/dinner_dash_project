@@ -1,34 +1,42 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Products</h1>
 
-<table>
-  <thead>
+<div class="row">
+  <%= form_with url: filter_products_path do |form| %>
+    <%= form.select :category_id, options_for_select(Category.all.collect {|c| [c.title, c.id]}.unshift(['Select Category', nil]), nil) %>
+    <%= form.submit "Search" %>
+  <% end %>
+</div>
+
+<table class="table table-striped">
+  <thead class="bg-dark text-white ">
     <tr>
       <th>Title</th>
       <th>Description</th>
       <th>Price</th>
       <th>Category</th>
-      <th colspan="3"></th>
+      <th ></th>
     </tr>
   </thead>
-
   <tbody>
     <% @products.each do |product| %>
       <tr>
         <td><%= product.title %></td>
         <td><%= product.description %></td>
         <td><%= product.price %></td>
-        <td><%= product.category_id %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= button_to "Add to cart", line_items_path(:product_id => product.id) %></td>
+        <td>
+          <% product.categories.each do |cat| %>
+            <%= cat.title%>,
+          <%end%>
+        </td>
+        <td><%= link_to 'Show', product %>
+          <%= link_to 'Edit', edit_product_path(product) %>
+          <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to "Add to cart", line_items_path(:product_id => product.id), method: :post %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
 <%= link_to 'New Product', new_product_path %>
+<%= link_to 'Clear Filter', products_path if @is_filtered %>

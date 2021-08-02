@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
-  belongs_to :category
+  has_many :cats_prods_associations
+  has_many :categories, through: :cats_prods_associations
   has_many :line_items, dependent: :destroy
 end

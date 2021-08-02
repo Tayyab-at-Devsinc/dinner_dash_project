@@ -7,23 +7,42 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Category.destroy_all
 Category.create(:title => "Meals")
+Category.create(:title => "Electronic Devices")
+Category.create(:title => "Mobile Phones")
+Category.create(:title => "Home Appliances")
+Category.create(:title => "Grocery")
 
 # PRODUCT
 Product.destroy_all
-product1 = Product.create({:title=>"tomato", :description=> "xyz", :price => 1, :category_id=>1})
-product2 = Product.create({:title=>"milk", :description=> "xyz", :price => 3, :category_id=>1})
-product3 = Product.create({:title=>"bread", :description=> "xyz", :price => 5.50, :category_id=>1})
-product4 = Product.create({:title=>"bacon", :description=> "xyz", :price => 10, :category_id=>1})
-product5 = Product.create({:title=>"cheese", :description=> "xyz", :price => 3.20, :category_id=>1})
+product1 = Product.create({:title=>"Tomato", :description=> "xyz", :price => 10})
+product2 = Product.create({:title=>"Milk", :description=> "xyz", :price => 3})
+product3 = Product.create({:title=>"Bread", :description=> "xyz", :price => 5.50})
+product4 = Product.create({:title=>"Apple Tablet", :description=> "xyz", :price => 10})
+product5 = Product.create({:title=>"Cheese", :description=> "xyz", :price => 3.20})
+product6 = Product.create({:title=>"Huawei Honor 8x", :description=> "xyz", :price => 30000})
 
 
-puts "Total number of products: #{Product.all.count}"
-puts "Product names: #{Product.all.pluck("title")}"
-puts "Product1: #{product1.title} price: #{product1.price.round(2)}"
-puts "Product2: #{product2.title} price: #{product2.price.round(2)}"
-puts "Product3: #{product3.title} price: #{product3.price.round(2)}"
-puts "Product4: #{product4.title} price: #{product4.price.round(2)}"
-puts "Product5: #{product5.title} price: #{product5.price.round(2)}"
+
+# Create associations b/w products and categories
+CatsProdsAssociation.destroy_all
+
+CatsProdsAssociation.create(category_id: 1, product_id: 1)
+CatsProdsAssociation.create(category_id: 5, product_id: 1)
+
+CatsProdsAssociation.create(category_id: 1, product_id: 2)
+
+CatsProdsAssociation.create(category_id: 1, product_id: 3)
+CatsProdsAssociation.create(category_id: 5, product_id: 3)
+
+CatsProdsAssociation.create(category_id: 3, product_id: 4)
+
+CatsProdsAssociation.create(category_id: 1, product_id: 5)
+
+CatsProdsAssociation.create(category_id: 1, product_id: 6)
+CatsProdsAssociation.create(category_id: 2, product_id: 6)
+
+# Another way
+# product6.categories<<Category.where(id: 1..2)
 
 # CART
 Cart.destroy_all

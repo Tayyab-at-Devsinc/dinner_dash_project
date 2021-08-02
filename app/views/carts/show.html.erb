@@ -32,5 +32,5 @@
 </table>
 
 <%= link_to "Proceed to checkout", new_order_path %><br>
-
+<%= link_to "Continue Purchasing...", products_path %><br>
 <%= link_to "Empty cart", cart_path(@current_cart),method: :delete, data: {confirm: "Are you sure?"}%>
