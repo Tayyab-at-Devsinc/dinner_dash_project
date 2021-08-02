@@ -39,9 +39,9 @@
     <!-- Right elements -->
     <div class="d-flex align-items-center">
       <!-- Icon -->
-      <a class="text-reset me-3 text-decoration-none" href="#">
-        <i class="fas fa-shopping-cart"></i> View Cart
-      </a>
+      <i class="fas fa-shopping-cart"></i>
+      <%= link_to 'View Cart', cart_path(@current_cart.id), class: "text-reset me-3 text-decoration-none" %>
+
       <%if user_signed_in?%>
         <%= link_to 'Edit Profile', edit_user_registration_path %>
         <%= link_to 'Sign out', destroy_user_session_path , method: :Delete %>

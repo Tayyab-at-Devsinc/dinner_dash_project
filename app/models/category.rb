@@ -1,3 +1,3 @@
 class Category < ApplicationRecord
-  has_many :products, dependent: :delete_all
+  has_many :products, dependent: :destroy
 end
