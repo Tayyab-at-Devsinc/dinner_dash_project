@@ -21,7 +21,13 @@ product4 = Product.create({:title=>"Apple Tablet", :description=> "xyz", :price 
 product5 = Product.create({:title=>"Cheese", :description=> "xyz", :price => 3.20})
 product6 = Product.create({:title=>"Huawei Honor 8x", :description=> "xyz", :price => 30000})
 
-
+# Add images to products
+product1.image.attach(io: File.open('app/assets/images/tomato.jpg'), filename: 'tomato.jpg')
+product2.image.attach(io: File.open('app/assets/images/milk.jpg'), filename: 'milk.jpg')
+product3.image.attach(io: File.open('app/assets/images/bread.jpg'), filename: 'bread.jpg')
+product4.image.attach(io: File.open('app/assets/images/apple_tablet.jpg'), filename: 'apple_tablet.jpg')
+product5.image.attach(io: File.open('app/assets/images/cheese.jpg'), filename: 'cheese.jpg')
+product6.image.attach(io: File.open('app/assets/images/honor8x.jpeg'), filename: 'honor8x.jpg')
 
 # Create associations b/w products and categories
 CatsProdsAssociation.destroy_all
