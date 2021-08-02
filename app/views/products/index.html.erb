@@ -18,6 +18,7 @@
         <th>Price</th>
         <th>Category</th>
         <th ></th>
+        <th ></th>
       </tr>
     </thead>
     <tbody>
@@ -32,12 +33,14 @@
             <%end%>
           </td>
           <% if product.image.attached? %>
-            <td><%= image_tag product.image, width: "200" %></td>
+            <td><%= image_tag product.image, width: "200", heigth: "200" %></td>
           <% end%>
-          <td><%= link_to 'Show', product %>
+          <td>
+            <%= link_to 'Show', product %>
             <%= link_to 'Edit', edit_product_path(product) %>
             <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <%= link_to "Add to cart", line_items_path(:product_id => product.id), method: :post %></td>
+            <%= link_to "Add to cart", line_items_path(:product_id => product.id), method: :post %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -45,5 +48,4 @@
   <br>
   <%= link_to 'New Product', new_product_path %>
   <%= link_to 'Clear Filter', products_path if @is_filtered %>
-
 </div>
