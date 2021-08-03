@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   def filter
     cat_id = params[:category_id]
     if cat_id != ''
-      @products = Product.joins(:categories).where(categories: { id: cat_id}).uniq
+      @products = Product.joins(:categories).where(categories: { id: cat_id }).uniq
       @is_filtered = true
       render :index
     else
@@ -30,14 +30,12 @@ class ProductsController < ApplicationController
   # POST /products or /products.json
   def create
     @product = Product.new(product_params)
-
     respond_to do |format|
       if @product.save
+        attach_placeholder_image unless @product.image.attached?
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -73,6 +71,18 @@ class ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:title, :description, :price, :image)
+    params.require(:product).permit(:title, :description, :price, :image, category_ids: [])
   end
+
+  def attach_placeholder_image
+    @product.image.attach(io: File.open('app/assets/images/placeholder_image.jpg'), filename: 'placeholder_image')
+  end
+  # useless, because it's implicitly handled by rails (my goodness)
+  # def create_cats_prods_associations
+  #   cat_ids= product_params[:category_ids]
+  #   cat_ids.shift
+  #   cat_ids.each do |id|
+  #     CatsProdsAssociation.create(category_id: id.to_i, product_id: @product.id)
+  #   end
+  # end
 end

@@ -17,9 +17,9 @@
         <td> <%= line_item.quantity %></td>
         <td><%= number_to_currency(line_item.total_price, unit: "Rs. ") %></td>
         <td class="text-end">
-          <%= link_to "+", line_item_add_path(:id => line_item), method: :post, class: "btn btn-success"%>
-          <%= link_to "-", line_item_reduce_path(:id => line_item), method: :post, class: "btn btn-warning"%>
-          <%= link_to "X", line_item_path(line_item), method: :delete, class: "btn btn-outline-danger"%>
+          <%= link_to "+", line_item_add_path(:id => line_item), method: :post,remote:true, class: "btn btn-success"%>
+          <%= link_to "-", line_item_reduce_path(:id => line_item), method: :post,remote:true, class: "btn btn-warning"%>
+          <%= link_to "X", line_item_path(line_item), method: :delete,remote:true, class: "btn btn-outline-danger"%>
         </td>
       </tr>
     <% end %>
@@ -30,7 +30,6 @@
     </tr>
   </tbody>
 </table>
-
 <%= link_to "Proceed to checkout", new_order_path %><br>
 <%= link_to "Continue Purchasing...", products_path %><br>
 <%= link_to "Empty cart", cart_path(@current_cart),method: :delete, data: {confirm: "Are you sure?"}%>
