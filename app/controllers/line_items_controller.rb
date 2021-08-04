@@ -1,25 +1,25 @@
 class LineItemsController < ApplicationController
 
   def create
-    # Find associated product and current cart
     chosen_product = Product.find(params[:product_id])
-    current_cart = @current_cart
-    # If cart already has this product then find the relevant line_item and iterate quantity otherwise create a new line_item for this product
-    if current_cart.products.include?(chosen_product)
-      # Find the line_item with the chosen_product
-      @line_item = current_cart.line_items.find_by(:product_id => chosen_product)
-      # Iterate the line_item's quantity by one
-      @line_item.quantity += 1
+    if chosen_product.available
+      current_cart = @current_cart
+      if current_cart.products.include?(chosen_product)
+        @line_item = current_cart.line_items.find_by(:product_id => chosen_product)
+        @line_item.quantity += 1
+      else
+        @line_item = LineItem.new
+        @line_item.cart = current_cart
+        @line_item.product = chosen_product
+        @line_item.quantity = 1
+      end
+      @line_item.save
+      flash[:notice] = 'Product added in cart'
+      redirect_to request.referer
     else
-      @line_item = LineItem.new
-      @line_item.cart = current_cart
-      @line_item.product = chosen_product
-      @line_item.quantity = 1
+      flash[:notice] = 'Product is suspended for sale!!!'
+      redirect_to products_path
     end
-
-    # Save and redirect to cart show path
-    @line_item.save
-    redirect_to cart_path
   end
 
   def destroy

@@ -33,7 +33,7 @@
 </table>
 </div>
 <div class="d-flex justify-content-between px-3">
-  <%= link_to "Continue Purchasing", products_path, class: "btn btn-secondary"%>
-  <%= link_to "Empty cart", cart_delete_path,method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"%>
-  <%= link_to "Proceed to checkout", orders_path, method: :post, class: "btn btn-success"%>
+  <%= link_to "Continue Purchasing", products_path, class: "btn btn-secondary ", style:"min-width:200px"%>
+  <%= link_to "Empty cart", cart_delete_path,method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger", style:"min-width:200px"%>
+  <%= link_to "Place Order", orders_path, method: :post, class: "btn btn-success ", style:"min-width:200px"%>
 </div>
