@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'carts/show'
 
-  get 'carts/:id' => 'carts#show', as: 'cart'
-  delete 'carts/:id' => 'carts#destroy'
+  get 'cart' => 'carts#show', as: 'cart'
+  delete 'cart' => 'carts#destroy', as: 'cart_delete'
 
   # Cart routes
   post 'line_items/:id/add' => 'line_items#add_quantity', as: 'line_item_add'
