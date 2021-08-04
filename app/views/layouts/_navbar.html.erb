@@ -40,19 +40,33 @@
               %>
             </li>
           <%end%>
+          <%if user_signed_in? && current_user.admin?%>
+            <li class="nav-item">
+              <%=
+                link_to 'Categories', categories_path, class: "nav-link"
+              %>
+            </li>
+             <li class="nav-item">
+              <%=
+                link_to 'Orders Dashboard', categories_path, class: "nav-link"
+              %>
+            </li>
+          <%end%>
         </ul>
         <!-- Left links -->
       </div>
       <div class="d-flex align-items-center">
-        <%= link_to cart_path, class: "text-reset me-3 text-decoration-none cart-button" do%>
+        <%= if user_signed_in? && !current_user.admin?
+           link_to cart_path, class: "text-reset me-3 text-decoration-none cart-button" do%>
           <i class="fas fa-shopping-cart"></i> View Cart
-        <%end%>
+        <%end
+        end%>
         <%if user_signed_in?%>
           <%=
-                link_to edit_user_registration_path, class: "btn btn-primary me-2 px-3" do
-                  current_user.full_name
-                end
-              %>
+            link_to edit_user_registration_path, class: "btn btn-primary me-2 px-3" do
+              current_user.full_name
+            end
+          %>
           <%= link_to 'Sign out', destroy_user_session_path , method: :Delete, class: "btn btn-outline-secondary px-3"%>
         <%else%>
           <%= link_to 'Sign in', new_user_session_path, class: "btn btn-outline-primary me-2 px-3"%>

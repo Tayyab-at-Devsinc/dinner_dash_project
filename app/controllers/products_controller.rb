@@ -17,6 +17,28 @@ class ProductsController < ApplicationController
     end
   end
 
+  def retire_product
+    @product = Product.find(params[:id])
+    @product.available=false
+    if @product.save
+      flash[:notice]="Product retired successfully..."
+    else
+      flash[:notice]="Failed to retire product..."
+    end
+    redirect_to products_path
+  end
+
+  def resume_product
+    @product = Product.find(params[:id])
+    @product.available=true
+    if @product.save
+      flash[:notice]="Product resumed successfully..."
+    else
+      flash[:notice]="Failed to resume product..."
+    end
+    redirect_to products_path
+  end
+
   # GET /products/1 or /products/1.json
   def show; end
 

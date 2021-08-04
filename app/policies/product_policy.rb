@@ -6,6 +6,13 @@ class ProductPolicy < ApplicationPolicy
   def show?
     true
   end
+  def retire_product?
+    admin_authorization
+  end
+
+  def resume_product?
+    admin_authorization
+  end
 
   def create?
     admin_authorization
