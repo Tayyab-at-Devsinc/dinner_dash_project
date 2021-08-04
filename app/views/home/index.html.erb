@@ -1,61 +1,32 @@
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <!-- Container wrapper -->
-  <div class="container-fluid">
-    <!-- Toggle button -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Navbar brand -->
-      <a class="navbar-brand mt-2 mt-lg-0" href="#">
-        <img
-          src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
-          height="15"
-          alt=""
-          loading="lazy"
-        />
-      </a>
-      <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to 'View Products', products_path, class: "nav-link" %>
-        </li>
-      </ul>
-      <!-- Left links -->
-    </div>
-    <!-- Collapsible wrapper -->
-
-    <!-- Right elements -->
-    <div class="d-flex align-items-center">
-      <!-- Icon -->
-      <i class="fas fa-shopping-cart"></i>
-      <%= link_to 'View Cart', cart_path(@current_cart.id), class: "text-reset me-3 text-decoration-none" %>
-
-      <%if user_signed_in?%>
-        <%= link_to 'Edit Profile', edit_user_registration_path %>
-        <%= link_to 'Sign out', destroy_user_session_path , method: :Delete %>
-      <%else%>
-        <%= link_to 'Sign in', new_user_session_path %>
-        <%= link_to 'Sign up', new_user_registration_path %>
-      <%end%>
-    </div>
-    <!-- Right elements -->
+<div id="carouselExampleIndicators" class="carousel slide homepage-carousel carousel-fade " data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
   </div>
-  <!-- Container wrapper -->
-</nav>
-<!-- Navbar -->
-
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag 'carousel_2.jpeg',class:"d-block w-100"  %>
+      <div class="carousel-caption d-none d-md-block ">
+        <h1 class="display-4 fw-bolder rounded ">Life's too short for boring food.
+        </h1>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag 'carousel_1.jpg',class:"d-block w-100"  %>
+      <div class="carousel-caption d-none d-md-block ">
+        <h1 class="display-4 fw-bolder rounded ">Just like grandma used to make</h1>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 <%if user_signed_in?%>
-    <h1 class="text-center mt-3">Hi, <%= current_user.email%></h1>
+  <h1 class="text-center mt-3">Hi, <%= current_user.full_name%></h1>
 <%end%>

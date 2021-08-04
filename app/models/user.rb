@@ -7,4 +7,8 @@ class User < ApplicationRecord
   validates_presence_of :email, :full_name
   validates :email, uniqueness: true
   validates :display_name, length: { in: 2..32 }
+
+  def admin?
+    self.admin
+  end
 end

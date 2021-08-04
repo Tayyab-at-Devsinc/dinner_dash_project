@@ -13,4 +13,41 @@
  *= require_tree .
  *= require_self
  */
-@import 'bootstrap/scss/bootstrap'
+@import 'bootstrap/scss/bootstrap';
+
+.card {
+
+  .card-body {
+    .price {
+      color: #f57224;
+    }
+  }
+
+  transition: box-shadow .15s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+  }
+}
+
+.cart-button
+{
+  transition: all 0.2s;
+  &:hover
+  {
+    position: relative;
+    transform: scale(1.1);
+  }
+}
+
+.carousel-caption
+{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  h1
+  {
+    background-color: rgba(33,33,33,.6);
+  }
+}
+

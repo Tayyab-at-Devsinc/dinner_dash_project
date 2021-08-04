@@ -1,51 +1,71 @@
 <div class="container">
   <h1 class="text-center my-3">Products</h1>
-  <%= form_with url: filter_products_path do |form| %>
+  <%= form_with url: filter_products_path, class:"mb-5" do |form| %>
     <div class="row my-2 gx-0">
       <div class="col-10 p-0">
         <%= form.select( :category_id, options_for_select(Category.all.collect {|c| [c.title, c.id]}.unshift(['Select Category', nil])), {}, { class: "form-select"})%>
       </div>
       <div class="col-2 p-0">
-        <%= form.submit "Search", class: "btn btn-success w-100" %>
+        <%= form.submit "Search", class: "btn btn-primary w-100" %>
       </div>
     </div>
   <% end %>
-  <table class="table table-striped">
-    <thead class="bg-dark text-white ">
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th ></th>
-        <th ></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @products.each do |product| %>
+  <%if current_user && current_user.admin?%>
+    <div class="row my-2 gx-0">
+      <div class="col-12 p-0">
+        <%= link_to 'Add New Product', new_product_path,  class: "btn btn-success w-100" %>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead class="bg-dark text-white ">
         <tr>
-          <td><%= product.title %></td>
-          <td><%= product.description %></td>
-          <td><%= product.price %></td>
-          <td>
-            <% product.categories.each do |cat| %>
-              <%= cat.title%>,
-            <%end%>
-          </td>
-          <% if product.image.attached? %>
-            <td><%= image_tag product.image, width: "200", heigth: "200" %></td>
-          <% end%>
-          <td>
-            <%= link_to 'Show', product %>
-            <%= link_to 'Edit', edit_product_path(product) %>
-            <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <%= link_to "Add to cart", line_items_path(:product_id => product.id), method: :post %>
-          </td>
+          <th >Image</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th ></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <br>
-  <%= link_to 'New Product', new_product_path %>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <% if product.image.attached? %>
+              <td><%= image_tag product.image, width: "200", height: "150" %></td>
+            <% end%>
+            <td style="vertical-align:middle"><%= product.title %></td>
+            <td style="vertical-align:middle"><%= product.description %></td>
+            <td style="vertical-align:middle"><%= product.price %></td>
+            <td style="vertical-align:middle">
+              <% product.categories.each do |cat| %>
+                <%= cat.title%>,
+              <%end%>
+            </td>
+            <td style="vertical-align:middle">
+              <%= link_to 'Show', product %>
+              <%= link_to 'Edit', edit_product_path(product) %>
+              <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to "Add to cart", line_items_path(:product_id => product.id), method: :post %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+  <%else%>
+    <div class="d-flex flex-wrap justify-content-between">
+      <% @products.each do |product| %>
+        <div class="card mb-4" style="width: 12rem;">
+          <%= image_tag product.image,  style: "height: 9rem", class: "card-image-top" %>
+          <div class="card-body">
+            <h5 class="card-title mb-0"><%= product.title.capitalize %></h5>
+            <div class="price">Rs. <%= product.price %></div>
+            <p class="card-text text-muted"><%= product.description%></p>
+          </div>
+            <%= link_to "Add to cart", line_items_path(:product_id => product.id), method: :post, class: "btn btn-outline-success w-100" %>
+        </div>
+      <%end%>
+    </div>
+  <%end%>
   <%= link_to 'Clear Filter', products_path if @is_filtered %>
 </div>
