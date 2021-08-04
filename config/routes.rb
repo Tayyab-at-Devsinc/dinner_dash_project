@@ -18,5 +18,10 @@ Rails.application.routes.draw do
 
   post 'filter_products', to: 'products#filter', as: 'filter_products'
 
+  post 'orders', to: 'orders#create'
+  get 'orders', to: 'orders#index'
+  get 'orders/:id', to: 'orders#show'
+
+
   root to: 'home#index'
 end

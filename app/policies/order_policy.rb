@@ -1,18 +1,18 @@
-class ProductPolicy < ApplicationPolicy
+class OrderPolicy < ApplicationPolicy
   def index?
     true
   end
 
   def show?
-    true
+    owner_or_admin?
   end
 
   def create?
-    admin_authorization
+    true
   end
 
   def new?
-    admin_authorization
+    true
   end
 
   def update?
@@ -28,7 +28,17 @@ class ProductPolicy < ApplicationPolicy
   end
 
   private
-  def admin_authorization
-    @user.nil? ? false : @user.admin?
+
+  def owner_or_admin?
+    is_owner || @user.admin?
   end
+
+  def is_owner
+    @record.user_id == @user.id
+  end
+
+  def admin_authorization
+    @user.admin?
+  end
+
 end

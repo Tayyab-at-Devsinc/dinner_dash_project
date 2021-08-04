@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  address: MyText
+  user: one
+  total_price: 9.99
+  order_time: 2021-08-04 13:01:48
+  order_status: MyString
 
 two:
-  name: MyString
-  email: MyString
-  address: MyText
+  user: two
+  total_price: 9.99
+  order_time: 2021-08-04 13:01:48
+  order_status: MyString

@@ -35,5 +35,5 @@
 <div class="d-flex justify-content-between px-3">
   <%= link_to "Continue Purchasing", products_path, class: "btn btn-secondary"%>
   <%= link_to "Empty cart", cart_delete_path,method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"%>
-  <%= link_to "Proceed to checkout", new_order_path, class: "btn btn-success"%>
+  <%= link_to "Proceed to checkout", orders_path, method: :post, class: "btn btn-success"%>
 </div>

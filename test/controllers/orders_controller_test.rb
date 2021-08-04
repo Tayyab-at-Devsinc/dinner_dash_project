@@ -11,8 +11,18 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get orders_new_url
+  test "should get edit" do
+    get orders_edit_url
+    assert_response :success
+  end
+
+  test "should get create" do
+    get orders_create_url
+    assert_response :success
+  end
+
+  test "should get destroy" do
+    get orders_destroy_url
     assert_response :success
   end
 end

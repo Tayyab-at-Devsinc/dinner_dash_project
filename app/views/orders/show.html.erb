@@ -1,2 +1,64 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
+<div class="container">
+
+  <h1 class="display-4 fw-bolder text-center">Order View</h1>
+  <div class="row">
+    <div class="col-4">
+      Order ID
+    </div>
+    <div class="col-8">
+      : <%= @order.id%>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-4">
+      Total Price
+    </div>
+    <div class="col-8">
+      : <%= @order.total_price%>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-4">
+      Status
+    </div>
+    <div class="col-8">
+      : <%= @order.order_status%>
+    </div>
+  </div>  <div class="row">
+    <div class="col-4">
+      Order Date
+    </div>
+    <div class="col-8">
+      : <%= @order.created_at.strftime("%m/%d/%Y")%>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-wrap ">
+    <%@order_items.each do |order_item|%>
+      <%= link_to order_item.product, class: "text-decoration-none" do%>
+        <div class="card mb-4 me-4" style="width: 12rem;">
+          <%= image_tag order_item.product.image,  style: "height: 9rem", class: "card-image-top" %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 px-1">
+                <h5 class="card-title mb-0 "><%= order_item.product.title.capitalize %></h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 px-1">Quantity </div>
+              <div class="col-6 px-1">: <%= order_item.quantity%> </div>
+            </div>
+            <div class="row">
+              <div class="col-5 px-1">
+                Subtotal
+              </div>
+              <div class="col-6 px-1">
+                : <%= order_item.sub_total%>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end%>
+    <%end%>
+  </div>
+</div>
