@@ -15,6 +15,10 @@ class OrderPolicy < ApplicationPolicy
     true
   end
 
+  def orders_dashboard?
+    admin_authorization
+  end
+
   def update?
     admin_authorization
   end

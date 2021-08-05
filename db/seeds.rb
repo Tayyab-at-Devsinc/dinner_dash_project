@@ -6,50 +6,101 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Category.destroy_all
-Category.create(:title => "Meals")
-Category.create(:title => "Electronic Devices")
-Category.create(:title => "Mobile Phones")
-Category.create(:title => "Home Appliances")
-Category.create(:title => "Grocery")
+CatsProdsAssociation.destroy_all
+Product.destroy_all
+Cart.destroy_all
+Order.destroy_all
+
+Category.create(:title => "Breakfast")
+Category.create(:title => "Casual Dining")
+Category.create(:title => "Fast Food")
+Category.create(:title => "Buffet")
+Category.create(:title => "Ghar ka khana")
+
 
 # PRODUCT
-Product.destroy_all
-product1 = Product.create({:title=>"Tomato", :description=> "xyz", :price => 10})
-product2 = Product.create({:title=>"Milk", :description=> "xyz", :price => 3})
-product3 = Product.create({:title=>"Bread", :description=> "xyz", :price => 5.50})
-product4 = Product.create({:title=>"Apple Tablet", :description=> "xyz", :price => 10})
-product5 = Product.create({:title=>"Cheese", :description=> "xyz", :price => 3.20})
-product6 = Product.create({:title=>"Huawei Honor 8x", :description=> "xyz", :price => 30000})
+size=20
+Products = Array.new(size)
+Titles = ["Egg McMuffin","Bread","Cheese","Milk", "CHILLI CRAB","CURRY FEAST","Roti Paratha", "BEEF RENDANG","BEEF NOODLES","Biryani","Nihari","Kabuli Pulao","Karahi", "Haleem","Mutton Korma","Tikka Kebab","Sajji", "Whopper","Cheeseburger","Pizza",]
+Descriptions = ["xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz","xyz",]
+Prices = [300,1300,500,200,100,50,600,800,1000,2000,500,300,300,200,100,150,120,2000,100,250,]
 
-# Add images to products
-product1.image.attach(io: File.open('app/assets/images/tomato.jpg'), filename: 'tomato.jpg')
-product2.image.attach(io: File.open('app/assets/images/milk.jpg'), filename: 'milk.jpg')
-product3.image.attach(io: File.open('app/assets/images/bread.jpg'), filename: 'bread.jpg')
-product4.image.attach(io: File.open('app/assets/images/apple_tablet.jpg'), filename: 'apple_tablet.jpg')
-product5.image.attach(io: File.open('app/assets/images/cheese.jpg'), filename: 'cheese.jpg')
-product6.image.attach(io: File.open('app/assets/images/honor8x.jpeg'), filename: 'honor8x.jpg')
+i=0
+while i<size do
+  Products[i] = Product.new(:title => Titles[i], :description => Descriptions[i], :price => Prices[i])
+  i= i+1
+end
 
 # Create associations b/w products and categories
-CatsProdsAssociation.destroy_all
+Products[0].categories<<Category.find(1)
+Products[0].categories<<Category.find(3)
+Products[1].categories<<Category.find(1)
+Products[2].categories<<Category.find(1)
+Products[3].categories<<Category.find(2)
+Products[4].categories<<Category.find(2)
+Products[5].categories<<Category.find(2)
+Products[6].categories<<Category.find(2)
+Products[7].categories<<Category.find(2)
+Products[8].categories<<Category.find(2)
+Products[9].categories<<Category.find(3)
+Products[10].categories<<Category.find(3)
+Products[11].categories<<Category.find(3)
+Products[12].categories<<Category.find(3)
+Products[13].categories<<Category.find(3)
+Products[14].categories<<Category.find(4)
+Products[15].categories<<Category.find(5)
+Products[16].categories<<Category.find(5)
+Products[17].categories<<Category.find(5)
+Products[18].categories<<Category.find(5)
+Products[19].categories<<Category.find(5)
 
-CatsProdsAssociation.create(category_id: 1, product_id: 1)
-CatsProdsAssociation.create(category_id: 5, product_id: 1)
+Products.each do |p|
+  p.save # to save cats
+end
 
-CatsProdsAssociation.create(category_id: 1, product_id: 2)
+# Add images to products
+ImageNames = ['egg_mcmuffin', 'bread', 'cheese', 'milk', 'chilli_crab', 'curry_feast', 'roti_paratha', 'beef_redeng', 'beef_noodles', 'biryani', 'nihari', 'kabuli_pulao', 'karahi', 'haleem', 'mutton_korma', 'tikka_kebab', 'sajji', 'whopper', 'cheeseburger', 'pizza']
+i=0
+while i<size do
+  Products[i].image.attach(io: File.open("app/assets/images/products/#{ImageNames[i]}.jpg"), filename: 'Image')
+  i= i+1
+end
 
-CatsProdsAssociation.create(category_id: 1, product_id: 3)
-CatsProdsAssociation.create(category_id: 5, product_id: 3)
 
-CatsProdsAssociation.create(category_id: 3, product_id: 4)
 
-CatsProdsAssociation.create(category_id: 1, product_id: 5)
+user1 = User.create(email: 'demo+rachel@jumpstartlab.com', password: 'password', full_name: 'Rachel Warbelow')
+user2 = User.create(email: 'demo+jeff@jumpstartlab.com', password: 'password', full_name: 'Jeff Casimir', display_name: 'j3')
+user3 = User.create(email: 'demo+jorge@jumpstartlab.com', password: 'password', full_name: 'Jorge Tellez', display_name: 'novohispano')
+admin1 = User.create(email: 'demo+josh@jumpstartlab.com', password: 'password', full_name: 'Josh Cheek', display_name: 'josh', admin:true)
+admin2 = User.create(email: 'tayyabejaz668@gmail.com', password: '123456', full_name: 'Tayyab Ejaz', display_name: 'Tayyab', admin:true)
 
-CatsProdsAssociation.create(category_id: 1, product_id: 6)
-CatsProdsAssociation.create(category_id: 2, product_id: 6)
+Orders = Array.new(10)
+Orders[0] = Order.new(user_id: user1.id, order_status: "placed", total_price: 12123)
+OrderItem.create(order_id: Orders[0].id, product_id: Products[0].id, quantity: 2)
+Orders[0].save
 
-# Another way
-# product6.categories<<Category.where(id: 1..2)
+Orders[1] = Order.new(user_id: user1.id, order_status: "placed", total_price: 445)
+OrderItem.create(order_id: Orders[1].id, product_id: Products[3].id, quantity: 1)
+Orders[1].save
 
-# CART
-Cart.destroy_all
-puts "\nTotal cart count: #{Cart.all.count}"
+Orders[2] = Order.new(user_id: user2.id, order_status: "completed", total_price: 5456)
+OrderItem.create(order_id: Orders[2].id, product_id: Products[5].id, quantity: 1)
+Orders[2].save
+
+Orders[3] = Order.new(user_id: user2.id, order_status: "completed", total_price: 445)
+OrderItem.create(order_id: Orders[3].id, product_id: Products[1].id, quantity: 1)
+Orders[3].save
+
+
+Orders[4] = Order.new(user_id: user3.id, order_status: "cancelled", total_price: 4545)
+OrderItem.create(order_id: Orders[4].id, product_id: Products[19].id, quantity: 1)
+Orders[4].save
+
+Orders[5] = Order.new(user_id: user3.id, order_status: "cancelled", total_price: 51)
+OrderItem.create(order_id: Orders[5].id, product_id: Products[18].id, quantity: 1)
+Orders[5].save
+
+
+Orders[6] = Order.new(user_id: user3.id, order_status: "placed", total_price: 510)
+OrderItem.create(order_id: Orders[6].id, product_id: Products[15].id, quantity: 1)
+Orders[6].save

@@ -18,12 +18,11 @@ Rails.application.routes.draw do
 
   post 'filter_products', to: 'products#filter', as: 'filter_products'
 
-  post 'orders', to: 'orders#create'
-  get 'orders', to: 'orders#index'
-  get 'orders/:id', to: 'orders#show'
 
   get 'retire_product/:id', to: 'products#retire_product', as: 'retire_product'
   get 'resume_product/:id', to: 'products#resume_product', as: 'resume_product'
+
+  get 'orders_dashboard', to: 'orders#orders_dashboard', as: 'orders_dashboard'
 
   root to: 'home#index'
 end
