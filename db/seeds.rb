@@ -75,32 +75,31 @@ admin1 = User.create(email: 'demo+josh@jumpstartlab.com', password: 'password', 
 admin2 = User.create(email: 'tayyabejaz668@gmail.com', password: '123456', full_name: 'Tayyab Ejaz', display_name: 'Tayyab', admin:true)
 
 Orders = Array.new(10)
-Orders[0] = Order.new(user_id: user1.id, order_status: "placed", total_price: 12123)
-OrderItem.create(order_id: Orders[0].id, product_id: Products[0].id, quantity: 2)
-Orders[0].save
+Orders[0] = Order.create(user_id: user1.id, order_status: "placed", total_price: 12123)
+item= OrderItem.create(order_id: Orders[0].id, product_id: Products[0].id, quantity: 2)
 
-Orders[1] = Order.new(user_id: user1.id, order_status: "placed", total_price: 445)
+Orders[1] = Order.create(user_id: user1.id, order_status: "placed", total_price: 445)
 OrderItem.create(order_id: Orders[1].id, product_id: Products[3].id, quantity: 1)
-Orders[1].save
 
-Orders[2] = Order.new(user_id: user2.id, order_status: "completed", total_price: 5456)
+
+Orders[2] = Order.create(user_id: user2.id, order_status: "completed", total_price: 5456)
 OrderItem.create(order_id: Orders[2].id, product_id: Products[5].id, quantity: 1)
-Orders[2].save
 
-Orders[3] = Order.new(user_id: user2.id, order_status: "completed", total_price: 445)
+
+Orders[3] = Order.create(user_id: user2.id, order_status: "completed", total_price: 445)
 OrderItem.create(order_id: Orders[3].id, product_id: Products[1].id, quantity: 1)
-Orders[3].save
 
 
-Orders[4] = Order.new(user_id: user3.id, order_status: "cancelled", total_price: 4545)
+
+Orders[4] = Order.create(user_id: user3.id, order_status: "cancelled", total_price: 4545)
 OrderItem.create(order_id: Orders[4].id, product_id: Products[19].id, quantity: 1)
-Orders[4].save
 
-Orders[5] = Order.new(user_id: user3.id, order_status: "cancelled", total_price: 51)
+
+Orders[5] = Order.create(user_id: user3.id, order_status: "cancelled", total_price: 51)
 OrderItem.create(order_id: Orders[5].id, product_id: Products[18].id, quantity: 1)
-Orders[5].save
 
 
-Orders[6] = Order.new(user_id: user3.id, order_status: "placed", total_price: 510)
+
+Orders[6] = Order.create(user_id: user3.id, order_status: "placed", total_price: 510)
 OrderItem.create(order_id: Orders[6].id, product_id: Products[15].id, quantity: 1)
-Orders[6].save
+

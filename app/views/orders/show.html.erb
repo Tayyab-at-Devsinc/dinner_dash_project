@@ -32,6 +32,24 @@
       : <%= @order.created_at.strftime("%d/%m/%Y")%>
     </div>
   </div>
+  <%if current_user.admin?%>
+    <div class="row">
+      <div class="col-4">
+        Purchaser's Email
+      </div>
+      <div class="col-8">
+        : <%= @order.user.email%>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-4">
+        Purchaser's Full Name
+      </div>
+      <div class="col-8">
+        : <%= @order.user.full_name%>
+      </div>
+     </div>
+  <%end%>
   <hr>
   <div class="d-flex flex-wrap ">
     <%@order_items.each do |order_item|%>
