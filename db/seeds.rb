@@ -62,7 +62,7 @@ end
 ImageNames = ['egg_mcmuffin', 'bread', 'cheese', 'milk', 'chilli_crab', 'curry_feast', 'roti_paratha', 'beef_redeng', 'beef_noodles', 'biryani', 'nihari', 'kabuli_pulao', 'karahi', 'haleem', 'mutton_korma', 'tikka_kebab', 'sajji', 'whopper', 'cheeseburger', 'pizza']
 i=0
 while i<size do
-  Products[i].image.attach(io: File.open("app/assets/images/products/#{ImageNames[i]}.jpg"), filename: 'Image')
+  Products[i].image.attach(io: File.open("app/assets/images/products/#{ImageNames[i]}.jpg"), filename: "#{ImageNames[i]}.jpg")
   i= i+1
 end
 
