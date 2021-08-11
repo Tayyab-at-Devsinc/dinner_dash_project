@@ -99,7 +99,8 @@ class ProductsController < ApplicationController
   end
 
   def attach_placeholder_image
-    @product.image.attach(io: File.open('app/assets/images/placeholder_image.jpg'), filename: 'placeholder_image')
+    file = URI.open("https://res.cloudinary.com/dk7yhg9uz/products/placeholder_image.jpg")
+    @product.image.attach(io: file, filename: 'placeholder_image')
   end
 
   def authorize_user

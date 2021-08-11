@@ -32,27 +32,27 @@ while i<size do
 end
 
 # Create associations b/w products and categories
-Products[0].categories<<Category.find(1)
-Products[0].categories<<Category.find(3)
-Products[1].categories<<Category.find(1)
-Products[2].categories<<Category.find(1)
-Products[3].categories<<Category.find(2)
-Products[4].categories<<Category.find(2)
-Products[5].categories<<Category.find(2)
-Products[6].categories<<Category.find(2)
-Products[7].categories<<Category.find(2)
-Products[8].categories<<Category.find(2)
-Products[9].categories<<Category.find(3)
-Products[10].categories<<Category.find(3)
-Products[11].categories<<Category.find(3)
-Products[12].categories<<Category.find(3)
-Products[13].categories<<Category.find(3)
-Products[14].categories<<Category.find(4)
-Products[15].categories<<Category.find(5)
-Products[16].categories<<Category.find(5)
-Products[17].categories<<Category.find(5)
-Products[18].categories<<Category.find(5)
-Products[19].categories<<Category.find(5)
+Products[0].categories<<Category.find_by(:title => "Breakfast")
+Products[0].categories<<Category.find_by(:title => "Fast Food")
+Products[1].categories<<Category.find_by(:title => "Breakfast")
+Products[2].categories<<Category.find_by(:title => "Breakfast")
+Products[3].categories<<Category.find_by(:title => "Casual Dining")
+Products[4].categories<<Category.find_by(:title => "Casual Dining")
+Products[5].categories<<Category.find_by(:title => "Casual Dining")
+Products[6].categories<<Category.find_by(:title => "Casual Dining")
+Products[7].categories<<Category.find_by(:title => "Buffet")
+Products[8].categories<<Category.find_by(:title => "Buffet")
+Products[9].categories<<Category.find_by(:title => "Buffet")
+Products[10].categories<<Category.find_by(:title => "Buffet")
+Products[11].categories<<Category.find_by(:title => "Buffet")
+Products[12].categories<<Category.find_by(:title => "Ghar ka khana")
+Products[13].categories<<Category.find_by(:title => "Ghar ka khana")
+Products[14].categories<<Category.find_by(:title => "Ghar ka khana")
+Products[15].categories<<Category.find_by(:title => "Ghar ka khana")
+Products[16].categories<<Category.find_by(:title => "Ghar ka khana")
+Products[17].categories<<Category.find_by(:title => "Fast Food")
+Products[18].categories<<Category.find_by(:title => "Fast Food")
+Products[19].categories<<Category.find_by(:title => "Fast Food")
 
 Products.each do |p|
   p.save # to save cats
@@ -62,10 +62,11 @@ end
 ImageNames = ['egg_mcmuffin', 'bread', 'cheese', 'milk', 'chilli_crab', 'curry_feast', 'roti_paratha', 'beef_redeng', 'beef_noodles', 'biryani', 'nihari', 'kabuli_pulao', 'karahi', 'haleem', 'mutton_korma', 'tikka_kebab', 'sajji', 'whopper', 'cheeseburger', 'pizza']
 i=0
 while i<size do
-  Products[i].image.attach(io: File.open("app/assets/images/products/#{ImageNames[i]}.jpg"), filename: "#{ImageNames[i]}.jpg")
+  file = URI.open("https://res.cloudinary.com/dk7yhg9uz/products/#{ImageNames[i]}.jpg")
+  Products[i].image.attach(io: file, filename: "#{ImageNames[i]}.jpg", content_type: 'image/jpg')
   i= i+1
 end
-
+# Note: use URI.open to open a remote file, (wasted 3 hours!)
 
 
 user1 = User.create(email: 'demo+rachel@jumpstartlab.com', password: 'password', full_name: 'Rachel Warbelow')

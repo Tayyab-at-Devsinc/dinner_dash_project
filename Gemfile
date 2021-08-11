@@ -31,6 +31,9 @@ gem "mini_magick"
 
 gem 'devise'
 
+gem 'cloudinary', require: true
+gem 'activestorage-cloudinary-service'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

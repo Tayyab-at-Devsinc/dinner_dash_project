@@ -31,7 +31,7 @@
         <% @products.each do |product| %>
           <tr>
             <% if product.image.attached? %>
-              <td><%= image_tag product.image, width: "200", height: "150" %></td>
+              <td><%= cl_image_tag(product.image.url, width: 200, height: 150, :crop=>"scale") %></td>
             <% end%>
             <td style="vertical-align:middle; <%= 'color: red' unless product.available%>"><%= product.title %></td>
             <td style="vertical-align:middle"><%= product.description %></td>
@@ -63,7 +63,9 @@
         <% if product.available%>
           <%= link_to product, class: "text-decoration-none" do%>
             <div class="card mb-4 me-4" style="width: 12rem;">
-              <%= image_tag product.image,  style: "height: 9rem", class: "card-image-top w-100" %>
+              <%if product.image.attached?%>
+                <%= cl_image_tag(product.image.url,:width=>200, :height=> 150,:crop=>"scale", style: "height: 9rem", class: "card-image-top w-100")%>
+              <%end%>
               <div class="card-body">
                 <h5 class="card-title mb-0"><%= product.title.capitalize %></h5>
                 <div class="price">Rs. <%= product.price %></div>
