@@ -64,7 +64,7 @@
           <%= link_to product, class: "text-decoration-none" do%>
             <div class="card mb-4 me-4" style="width: 12rem;">
               <%if product.image.attached?%>
-                <%= image_tag product.image , style: "height: 9rem", class: "card-image-top w-100" %>
+                <%= cl_image_tag(product.image.url ,:width=>200, :height=> 150,:crop=>"scale", style: "height: 9rem", class: "card-image-top w-100")%>
               <%end%>
               <div class="card-body">
                 <h5 class="card-title mb-0"><%= product.title.capitalize %></h5>
@@ -80,4 +80,3 @@
   <%end%>
   <%= link_to 'Clear Filter', products_path if @is_filtered %>
 </div>
- <%# <%= cl_image_tag(product.image,:width=>200, :height=> 150,:crop=>"scale", style: "height: 9rem", class: "card-image-top w-100")%>
