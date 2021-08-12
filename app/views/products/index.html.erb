@@ -71,7 +71,7 @@
                 <div class="price">Rs. <%= product.price %></div>
                 <p class="card-text text-muted"><%= product.description%></p>
               </div>
-              <%= link_to "Add to cart", line_items_path(:product_id => product.id), method: :post, class: "btn btn-outline-success w-100" %>
+              <%= link_to "Add to cart", line_items_path(:product_id => product.id), method: :post, class: "btn btn-outline-success w-100",  remote: true %>
             </div>
           <%end%>
         <%end%>
