@@ -31,6 +31,8 @@ gem "mini_magick"
 
 gem 'devise'
 
+gem 'kaminari'
+
 gem 'cloudinary', require: true
 gem 'activestorage-cloudinary-service'
 gem 'rack-cors'
