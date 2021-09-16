@@ -3,19 +3,31 @@ class ProductsController < ApplicationController
   before_action :authorize_user, except: :filter
   # GET /products or /products.json
   def index
-    @products = Product.all
-  end
-
-  def filter
-    cat_id = params[:category_id]
-    if cat_id != ''
-      @products = Product.joins(:categories).where(categories: { id: cat_id }).uniq
-      @is_filtered = true
-      render :index
-    else
-      redirect_to action: :index
+    respond_to do |format|
+      format.html do
+        @products = Product.page(params[:page])
+      end
+      format.js do
+        cat_id = params[:category_id]
+        if cat_id==""
+          @products = Product.all
+        else
+          @products = Product.joins(:categories).where(categories: { id: cat_id}).uniq
+        end
+      end
     end
   end
+
+  # def filter
+  #   cat_id = params[:category_id]
+  #   if cat_id != ''
+  #     @products = Product.joins(:categories).where(categories: { id: cat_id }).uniq
+  #     @is_filtered = true
+  #     render :index
+  #   else
+  #     redirect_to action: :index
+  #   end
+  # end
 
   def retire_product
     @product = Product.find(params[:id])
@@ -99,7 +111,8 @@ class ProductsController < ApplicationController
   end
 
   def attach_placeholder_image
-    @product.image.attach(io: File.open('app/assets/images/placeholder_image.jpg'), filename: 'placeholder_image')
+    file = URI.open("https://res.cloudinary.com/dk7yhg9uz/products/placeholder_image.jpg")
+    @product.image.attach(io: file, filename: 'placeholder_image')
   end
 
   def authorize_user

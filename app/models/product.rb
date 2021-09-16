@@ -8,4 +8,6 @@ class Product < ApplicationRecord
   validates :title, uniqueness: true
   validates :price, numericality: {greater_than_or_equal_to: 0}
   validates :categories, presence: { message: ': Atleast one category must be selected' }
+
+  paginates_per 10
 end
